@@ -5,11 +5,12 @@
   index) which modify that core."
   (:require [riemann.core :as core]
             [riemann.service :as service]
-            [riemann.transport.tcp        :as tcp]
-            [riemann.transport.udp        :as udp]
-            [riemann.transport.websockets :as websockets]
-            [riemann.transport.sse        :as sse]
-            [riemann.transport.graphite   :as graphite]
+            [riemann.transport.tcp           :as tcp]
+            [riemann.transport.udp           :as udp]
+            [riemann.transport.websockets    :as websockets]
+            [riemann.transport.sse           :as sse]
+            [riemann.transport.graphite      :as graphite]
+            [riemann.transport.elasticsearch :as elasticsearch]
             [riemann.repl]
             [riemann.index]
             [riemann.logging :as logging]
@@ -93,6 +94,11 @@
   (let [service (apply core/instrumentation-service opts)]
     (swap! next-core core/conj-service service :force)
     service))
+
+(defn elasticsearch-writer
+  ""
+  [& opts]
+  (service! (elasticsearch/elasticsearch-writer (apply hash-map opts))))
 
 (defn tcp-server
   "Add a new TCP server with opts to the default core."

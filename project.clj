@@ -42,6 +42,7 @@
     [clj-campfire "2.2.0"]
     [less-awful-ssl "0.1.1"]
     [clj-nsca "0.0.3"]
+    [clojurewerkz/elastisch "1.3.0"]
   ]
   :plugins [[codox "0.6.1"]
             [lein-rpm "0.0.5"]]
