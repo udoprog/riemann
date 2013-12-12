@@ -11,6 +11,7 @@
             [riemann.transport.websockets :as websockets]
             [riemann.transport.sse        :as sse]
             [riemann.transport.graphite   :as graphite]
+            [riemann.subscriber           :as subscriber]
             [riemann.repl]
             [riemann.index]
             [riemann.logging :as logging]
@@ -109,6 +110,11 @@
   (let [service (apply core/instrumentation-service opts)]
     (swap! next-core core/conj-service service :force)
     service))
+
+(defn subscriber
+  ""
+  [& args]
+  (service! (apply subscriber/subscriber args)))
 
 (defn tcp-server
   "Add a new TCP server with opts to the default core.
